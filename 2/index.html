@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Ejemplo de API</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mx-auto my-5 text-center">
+                <button class="btn btn-danger w-100" onclick="traer()">Obtener</button>
+                <div class="mt-5" id="contenido">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="js/jquery-3.5.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        var contenido = document.querySelector('#contenido')
+        function traer(){
+            // contenido.innerHTML = `<h3>Ejemplo</h3>`
+            fetch('js/texto.txt')
+            .then(data => data.text())
+            .then(data => {
+                console.log(data)
+                contenido.innerHTML = `<p>${data}<p>`
+            })
+        }
+    </script>
+</body>
+</html>

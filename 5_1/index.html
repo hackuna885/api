@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Ejemplo de API PHP</title>
+    <style>
+        html {
+        height: 100%;
+        }
+
+        body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mx-auto">
+                <div class="card">
+                    <div class="card-body">
+                        <h3>API con PHP</h3>
+                        <form id="formulario">
+                            <input type="text" class="form-control my-3" placeholder="Usuario" name="usuario">
+                            <input type="password" class="form-control my-3" placeholder="Password" name="pass">
+                            <button class="btn btn-primary" type="submit">Continuar</button>
+                        </form>
+                        <div class="my-4" id="resultado"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        let formulario = document.querySelector('#formulario')
+
+        formulario.addEventListener('submit', function(e){
+            e.preventDefault()
+            console.log('diste click')
+
+            let resultado = document.querySelector('#resultado')
+            let datos = new FormData(formulario)
+
+            console.log(datos)
+            console.log(datos.get('usuario'))
+            console.log(datos.get('pass'))
+
+            fetch('post.php',{
+                method: 'POST',
+                body: datos
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if(data === 'error'){
+                    resultado.innerHTML = `
+                    <div class="alert alert-danger" role="alert">
+                    Llena todos los campos
+                    </div>
+                    `
+                }else{
+                    resultado.innerHTML = `
+                    <div class="alert alert-primary" role="alert">
+                    ${data}
+                    </div>
+                    `
+                }
+            })
+
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <title>Ejemplo de API y PHP</title>
+    <style>
+        html {
+        height: 100%;
+        }
+
+        body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mx-auto">
+                <h3 class="my-4 text-primary">Fomulairo FetchAPI PHP</h3>
+                <div class="card shadow border border-primary">
+                    <div class="card-body">
+                        <form id="formulario">
+                            <input type="text" name="usuario" class="form-control my-3 border border-primary" placeholder="Ingresa nombre">
+                            <input type="password" name="pass" class="form-control my-3 border border-primary" placeholder="Ingresa password">
+                            <button class="btn btn-primary">Continuar</button>
+                        </form>
+                        <div class="my-3" id="resultado"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/jquery-3.5.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        let formulario = document.querySelector('#formulario')
+
+        formulario.addEventListener('submit', function(e){
+            e.preventDefault()
+            console.log('diste click')
+
+            let resultado = document.querySelector('#resultado')
+
+            let datos = new FormData(formulario);
+
+            console.log(datos)
+            console.log(datos.get('usuario'))
+            console.log(datos.get('pass'))
+
+            fetch('post.php', {
+                method: 'POST',
+                body: datos
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if(data === 'error'){
+                    resultado.innerHTML = `
+                    <div class="alert alert-danger animate__animated animate__fadeIn" role="alert">
+                        llena todos los campos
+                    </div>
+                    `
+                }else{
+                    resultado.innerHTML = `
+                    <div class="alert alert-primary animate__animated animate__fadeIn" role="alert">
+                        ${data}
+                    </div>
+                    `
+                }
+            })
+            
+        })
+    </script>
+</body>
+</html>

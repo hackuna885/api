@@ -1,0 +1,6 @@
+[
+    { "id":1, "nombre": "Gerardo Raúl Velázquez Lora", "correo": "rul9229@gmail.com", "estado": true },
+    { "id":2, "nombre": "Patricia Torres Trejo", "correo": "paty0364@gmail.com", "estado": false },
+    { "id":3, "nombre": "Oliver Raúl Velázquez Torres", "correo": "hackuna885@gmail.com", "estado": true },
+    { "id":4, "nombre": "Alma Jazmín Velázquez Torres", "correo": "almayoiy@gmail.com", "estado": true }
+]

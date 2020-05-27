@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Ejemplo de API</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto text-center my-5">
+                <button class="btn btn-danger w-100" onclick="traer()">Obtener</button>
+                <div class="my-5" id="contenido">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        let contenido = document.querySelector('#contenido')
+
+        // function traer(){
+        //     contenido.innerHTML = `<h3>Yo soy el resultado del boton</h3>`
+        // }
+
+        function traer(){
+            fetch('js/texto.txt')
+            .then(data => data.text())
+            .then(data => {
+                contenido.innerHTML = `<p>${data}</p>`
+            })
+        }
+
+    </script>
+</body>
+</html>

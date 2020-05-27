@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>Ejemplo de API JSON con Tabla</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 my-5 mx-auto">
+                <button class="btn btn-danger w-100" onclick="traer()">Obtener</button>
+                <table class="table my-5">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Nombre:</th>
+                            <th>Correo:</th>
+                            <th>Estado:</th>
+                        </tr>
+                    </thead>
+                    <tbody id="contenido">
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        let contenido = document.querySelector('#contenido')
+
+        function traer() {
+            fetch('tabla.json')
+            .then(res => res.json())
+            .then(data => {
+                tabla(data)
+            })
+        }
+
+        function tabla(data) {
+            contenido.innerHTML = ''
+            for(let liData of data){
+                contenido.innerHTML += `
+                        <tr>
+                            <td>${liData.id}</td>
+                            <td>${liData.nombre}</td>
+                            <td>${liData.correo}</td>
+                            <td>${liData.estado ? 'Activo' : 'Eliminado'}</td>
+                        </tr>
+                `
+            }
+        }
+    </script>
+</body>
+</html>
